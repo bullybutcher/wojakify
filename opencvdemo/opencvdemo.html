@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)https://docs.opencv.org/3.4/js_thresholding_adaptiveThreshold.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<title>Adaptive Threshold Example</title>
+<link href="./opencvdemo_files/js_example_style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h2>Adaptive Threshold Example</h2>
+<p>
+    &lt;canvas&gt; elements named <b>canvasInput</b> and <b>canvasOutput</b> have been prepared.<br>
+    Click <b>Try it</b> button to see the result. You can choose another image.<br>
+    You can change the code in the &lt;textarea&gt; to investigate more.
+</p>
+<div>
+<div class="control"><button id="tryIt">Try it</button></div>
+<textarea class="code" rows="30" cols="100" id="codeEditor" spellcheck="false"></textarea>
+<p class="err" id="errorMessage"></p>
+</div>
+<div>
+    <table cellpadding="0" cellspacing="0" width="0" border="0">
+    <tbody><tr>
+        <td>
+            <canvas id="canvasInput" width="332" height="430"></canvas>
+        </td>
+        <td>
+            <canvas id="canvasOutput" width="332" height="430"></canvas>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="caption">canvasInput <input type="file" id="fileInput" name="file" accept="image/*"></div>
+        </td>
+        <td>
+            <div class="caption">canvasOutput</div>
+        </td>
+    </tr>
+    </tbody></table>
+</div>
+<script async="" type="text/javascript" src="./opencvdemo_files/opencv.js"></script>
+<script src="./opencvdemo_files/utils.js" type="text/javascript"></script>
+<script defer src="./opencvdemo_files/trans.js" type="module"></script>
+<script id="codeSnippet" type="text/code-snippet">
+let src = cv.imread('canvasInput');
+let dst = new cv.Mat();
+cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY, 0);
+// You can try more different parameters
+cv.adaptiveThreshold(src, dst, 200, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 3, 2);
+cv.imshow('canvasOutput', dst);
+src.delete();
+dst.delete();
+</script>
+<script type="text/javascript">
+let utils = new Utils('errorMessage');
+
+utils.loadCode('codeSnippet', 'codeEditor');
+utils.loadImageToCanvas('lena.jpg', 'canvasInput');
+utils.addFileInputHandler('fileInput', 'canvasInput');
+
+let tryIt = document.getElementById('tryIt');
+tryIt.addEventListener('click', () => {
+    utils.executeCode('codeEditor');
+});
+
+utils.loadOpenCv(() => {
+    tryIt.removeAttribute('disabled');
+});
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91f45ad5ec99e05a',t:'MTc0MTc5MzY1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;" src="./opencvdemo_files/saved_resource.html"></iframe><script defer="" src="./opencvdemo_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;91f45ad5ec99e05a&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}},&quot;version&quot;:&quot;2025.1.0&quot;,&quot;token&quot;:&quot;55698296dd8c4381b9a17117972ffe0c&quot;}" crossorigin="anonymous"></script>
+
+
+</body></html>
